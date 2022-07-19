@@ -275,6 +275,7 @@ async def on_member_join(member):
 
 async def change_data():
     if redis_url is None:  # Обработка базы данных, если нет подключения к редис
+        print('redis_url is None')
         json.dump(data,
                   open('Database.json', 'w', encoding='utf-8'),
                   indent=2,
@@ -287,7 +288,7 @@ async def change_data():
 
         redis_db = redis.from_url(redis_url)
         redis_db.set('data', json.dumps(data))
-
+        print('Ну вроде сохранили')
 
 @bot.command()
 async def add_emoji(ctx, emoji, text):
