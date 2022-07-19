@@ -16,6 +16,6 @@ pyparsing
 redis
 setuptools
 typing-extensions
-wrapt1
+wrapt
 yarl
 zipp
