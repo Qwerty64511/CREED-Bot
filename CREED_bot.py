@@ -14,6 +14,7 @@ client = discord.Client(intents=intents)
 
 redis_url = os.environ['REDIS_URL']
 Token = os.environ['Token']
+
 #  Создаём базу данных либо загружаем готовую
 if redis_url is None:
 
@@ -84,10 +85,11 @@ else:
 
     redis_db = redis.from_url(redis_url)
     raw_data = redis_db.get('Database')
+    print(raw_data)
     print('Вывод базы данных')
 
     if raw_data is None:
-
+        print('None')
         data = {
             "post_id": 999004089197264997,
 
@@ -147,7 +149,8 @@ else:
         }
 
     else:
-        data = json.loads(raw_data)  # выводим нашу базу данных
+        data = json.loads(raw_data)
+        print(data)# выводим нашу базу данных
         print('Вывели')
 
 bot = commands.Bot(command_prefix='!', intents=intents)
