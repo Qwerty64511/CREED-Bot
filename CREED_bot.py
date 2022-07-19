@@ -11,7 +11,6 @@ intents = discord.Intents.default()
 intents.members = True
 
 client = discord.Client(intents=intents)
-bot = commands.Bot(command_prefix=Discordbot.prefix, intents=intents)
 
 redis_url = os.environ['REDIS_URL']
 Token = os.environ['Token']
@@ -152,6 +151,8 @@ else:
         print('Вывели')
 
 bot = commands.Bot(command_prefix='!', intents=intents)
+
+
 @bot.event
 async def on_ready():
     print('bot connected')
