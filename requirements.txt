@@ -1,7 +1,7 @@
 discord.py==1.7.3
 redis
 aiohttp==3.7.4.post0
-async-timeout==4.0.2
+async-timeout
 attrs==21.4.0
 chardet==4.0.0
 Deprecated==1.2.13
