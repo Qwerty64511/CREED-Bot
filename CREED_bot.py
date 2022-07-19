@@ -1,3 +1,5 @@
+import os
+
 import discord
 from discord import utils, guild
 from discord.ext import commands
@@ -12,18 +14,18 @@ intents.members = True
 client = discord.Client(intents=intents)
 bot = commands.Bot(command_prefix=Discordbot.prefix, intents=intents)
 
-data = json.load(open('Database.json', 'r', encoding='utf-8'))
-redis_url = '123'
-
+redis_url = os.environ['redis_url']
+Token = os.environ['Token']
 #  Создаём базу данных либо загружаем готовую
 if redis_url is None:
+
     try:
-        Database = json.load(open('Database.json', 'r', encoding='utf-8'))  # выводим нашу базу данных
+        data = json.load(open('Database.json', 'r', encoding='utf-8'))  # выводим нашу базу данных
+
     except FileNotFoundError:
-        Database = {
-            "Token": "OTk3NTIxMjExODA4NTUxMDkz.G5fCVR.Ypt_arj-9AMz9SMyxkBybyrPRftr2HdK8lRhms",
+
+        data = {
             "post_id": 997535717926379690,
-            "redis_url": "123",
             "roles": {
                 "😀": 997530892283154436,
                 "😭": 997530944640667759,
@@ -81,15 +83,15 @@ if redis_url is None:
 
 
 else:
+
     redis_db = redis.from_url(redis_url)
     raw_data = redis_db.get('Database')
     print('Вывод базы данных')
 
     if raw_data is None:
-        Database = {
-            "Token": "OTk3NTIxMjExODA4NTUxMDkz.G5fCVR.Ypt_arj-9AMz9SMyxkBybyrPRftr2HdK8lRhms",
+
+        data = {
             "post_id": 997535717926379690,
-            "redis_url": "123",
             "roles": {
                 "😀": 997530892283154436,
                 "😭": 997530944640667759,
@@ -146,7 +148,7 @@ else:
         }
 
     else:
-        Database = json.loads(raw_data)  # выводим нашу базу данных
+        data = json.loads(raw_data)  # выводим нашу базу данных
         print('Вывели')
 
 
@@ -396,4 +398,4 @@ async def on_message(message):
             print(f'Сообщение удалено {message.content}')
 
 
-bot.run(data['Token'])
+bot.run(Token)
