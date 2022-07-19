@@ -14,7 +14,7 @@ intents.members = True
 client = discord.Client(intents=intents)
 bot = commands.Bot(command_prefix=Discordbot.prefix, intents=intents)
 
-redis_url = os.environ['redis_url']
+redis_url = os.environ['REDIS_URL']
 Token = os.environ['Token']
 #  Создаём базу данных либо загружаем готовую
 if redis_url is None:
@@ -92,6 +92,7 @@ else:
 
         data = {
             "post_id": 997535717926379690,
+
             "roles": {
                 "😀": 997530892283154436,
                 "😭": 997530944640667759,
@@ -151,7 +152,7 @@ else:
         data = json.loads(raw_data)  # выводим нашу базу данных
         print('Вывели')
 
-
+bot = commands.Bot(command_prefix='!', intents=intents)
 @bot.event
 async def on_ready():
     print('bot connected')
