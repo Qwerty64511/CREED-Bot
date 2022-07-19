@@ -3,7 +3,6 @@ import os
 import discord
 from discord import utils, guild
 from discord.ext import commands
-import Discordbot
 
 import redis
 import json
