@@ -242,7 +242,7 @@ async def tech_info(ctx):
 !tech_info - техническая информация 
 С уважением, @Qwerty64511.CREED#1408''')
 
-    if str(author) in (data['administrators']['admins'] or data['administrators']['editors']):
+    if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
         await author.send('''Специально для администраторов, редакторов: 
 !add_emoji - Добавляет эмодзи и номер роли в базу данных 
 Пример работы: !add_emoji 😋 11112222 Необходимы как минимум права редактора 
@@ -349,6 +349,13 @@ async def delit_emoji(ctx, emoji):
         await change_data()
 
         print(f'{emoji} удалён из базы данных')
+
+
+@bot.command()
+async def send_emoji(ctx):
+    author = ctx.message.author
+    if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
+        await author.send(data['emoji'])
 
 
 @bot.command()
