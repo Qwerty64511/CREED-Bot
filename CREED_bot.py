@@ -84,7 +84,7 @@ if redis_url is None:
 else:
 
     redis_db = redis.from_url(redis_url)
-    raw_data = redis_db.get('Database')
+    raw_data = redis_db.get('data')
     print(raw_data)
     print('Вывод базы данных')
 
@@ -150,7 +150,7 @@ else:
 
     else:
         data = json.loads(raw_data)
-        print(data)# выводим нашу базу данных
+        print(data)  # выводим нашу базу данных
         print('Вывели')
 
 bot = commands.Bot(command_prefix='!', intents=intents)
@@ -280,9 +280,11 @@ async def change_data():
                   indent=2,
                   ensure_ascii=False,
                   )
+
         # Загружаем базу данных из редис
 
     else:
+
         redis_db = redis.from_url(redis_url)
         redis_db.set('data', json.dumps(data))
 
