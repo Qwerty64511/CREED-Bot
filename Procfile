@@ -1,1 +1,1 @@
-bot: python3 CREED_bot.py
+worker: python3 CREED_bot.py
