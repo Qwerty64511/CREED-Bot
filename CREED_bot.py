@@ -393,7 +393,7 @@ async def on_message(message):
         await bot.process_commands(message)
 
     else:
-        if check(mes):
+        if await check(mes):
             await message.delete()
 
             print(f'Сообщение удалено {message.content}')
