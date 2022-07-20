@@ -362,7 +362,7 @@ async def delit_emoji(ctx, emoji):
 async def send_emoji(ctx):
     author = ctx.message.author
     if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
-        await author.send(data['emoji'])
+        await author.send(data['roles'])
 
 
 @bot.command()
