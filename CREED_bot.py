@@ -3,7 +3,7 @@ import os
 import discord
 from discord import utils, guild
 from discord.ext import commands
-
+# from discord.ui import Bu
 import redis
 import json
 
@@ -237,9 +237,9 @@ UPD: для полной информации о функционале бота
 async def tech_info(ctx):
     author = ctx.message.author
 
-    await author.send('''Функционал: добавление/удаление роли по реакции 
-Приветствие пользователя при присоединении к серверу 
-Фильтрация мата в сообщениях - в разработке 
+    await author.send('''Функционал: добавление/удаление роли по реакции, 
+Приветствие пользователя при присоединении к серверу, 
+Фильтрация банвордов твитча в сообщениях, 
 Полный список команд: 
 !base_info - базовая информация 
 !tech_info - техническая информация 
