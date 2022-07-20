@@ -221,6 +221,16 @@ async def on_raw_reaction_remove(payload):
 
 
 @bot.command()
+async def change_post(ctx):
+    author = ctx.message.author
+
+    if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
+        data['post_id'] = 999350034845933598
+        await change_data()
+        await author.send(data['post_id'])
+
+
+@bot.command()
 async def base_info(ctx):
     author = ctx.message.author
 
