@@ -290,11 +290,12 @@ async def change_data():
         redis_db.set('data', json.dumps(data))
         print('Ну вроде сохранили')
 
+
 @bot.command()
 async def add_emoji(ctx, emoji, text):
     author = ctx.message.author
 
-    if str(author) in (data['administrators']['admins'] or data['administrators']['editors']):
+    if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
 
         print(f'{author} Отправил {emoji} и роль {text}')
 
@@ -312,7 +313,7 @@ async def add_emoji(ctx, emoji, text):
 async def add_banworld(ctx, *, text):
     author = ctx.message.author
 
-    if str(author) in (data['administrators']['admins'] or data['administrators']['editors']):
+    if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
         if text not in data['twitchlist']:
             data['twitchlist'] += [str(text)]
 
@@ -329,7 +330,7 @@ async def add_banworld(ctx, *, text):
 async def delit_banworld(ctx, *, text):
     author = ctx.message.author
 
-    if str(author) in (data['administrators']['admins'] or data['administrators']['editors']):
+    if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
         if text in data['twitchlist']:
 
             data['twitchlist'].remove(str(text))
@@ -349,7 +350,7 @@ async def delit_banworld(ctx, *, text):
 async def delit_emoji(ctx, emoji):
     author = ctx.message.author
 
-    if str(author) in (data['administrators']['admins'] or data['administrators']['editors']):
+    if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
         del data['roles'][emoji]
 
         await change_data()
@@ -368,6 +369,7 @@ async def send_emoji(ctx):
 async def become_admin(ctx, *, text):  # сделать ручное добавление админа (Человек не просто пишет, его добавляют,
     # а человек пишет ник другого человека и его добавляют в список. Сделать 2 вида админов: редактор, технический.
     # Сделать красивый вывод базы данных(И нужынх данных из неё) при помощи команды. Пришить интерактивную клавиатуру
+    # Сделать хэширование паролей.
     author = ctx.message.author
 
     if str(author) not in (data['administrators']['admins']):
