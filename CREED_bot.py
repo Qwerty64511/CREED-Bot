@@ -253,6 +253,7 @@ async def tech_info(ctx):
 Пример: !become_admin 1488 
 !add_banworld - Добавляет запретные слова
 Пример: !add_banworld шлюпка. Слова Вводить с МАЛОЙ буквы!!!!!!!!
+!send_emoji
 Обращение от разработчика: Если вы, гении засрёте мне базу данных говном. 
 Будете использовать команды криво, или ещё что-то. Я блять вам в фуфайку насру.''')
 
@@ -302,6 +303,7 @@ async def add_emoji(ctx, emoji, text):
         data['roles'][emoji] = int(text)
 
         await change_data()
+        await author.send('Эмодзи получен')
 
     else:
 
@@ -363,6 +365,15 @@ async def send_emoji(ctx):
     author = ctx.message.author
     if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
         await author.send(data['roles'])
+        print(f'{author} получил данные про emoji')
+
+
+@bot.command()
+async def send_banworlds(ctx):
+    author = ctx.message.author
+    if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
+        await author.send(data['twitchlist'])
+        print(f'{author} получил данные про банворды')
 
 
 @bot.command()
@@ -379,6 +390,7 @@ async def become_admin(ctx, *, text):  # сделать ручное добав�
             data['administrators']['admins'] += [str(author)]
 
             await change_data()
+            await author.send('Вы стали администратором бота сервера CREED')
 
     if str(author) not in data['administrators']['editors']:
         if text == '123456':
