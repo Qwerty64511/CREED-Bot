@@ -175,7 +175,7 @@ async def check(text):
     return 0
 
 
-async def check_adm(mes):
+def check_adm(mes):
     for i in range(len(data['administrators']['admins'])):
         if str(data['administrators']['admins'][i] in str(mes)):
             return i
@@ -441,7 +441,7 @@ async def delit_admin(ctx):
     mes = ctx.message.content
 
     if str(author) in (data['administrators']['admins']):
-        num = check_adm(mes)
+        num = int(check_adm(mes))
 
         if num != 0:
 
