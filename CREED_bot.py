@@ -432,10 +432,15 @@ async def delit_admin(ctx, *, text):
 
         if (data['administrators']['admins'] in str(mes)) or (data['administrators']['editors'] in str(mes)):
 
-            if (str(mes) in (data['administrators']['admins'])) and (str(mes) != author):
-                del data['administrators']['admins'][mes]
+            if (data['administrators']['admins'] in str(mes)) and (author not in mes):
 
-                await change_data()
+                for i in range(len(data['administrators']['admins'])):
+
+                    if data['administrators']['admins'][i] in str(mes):
+
+                        del data['administrators']['admins'][i]
+
+                        await change_data()
 
                 print(f'{mes} удалён из списка администраторов')
 
