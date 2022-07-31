@@ -438,5 +438,7 @@ async def on_message(ctx, message):
 
             print(f'Сообщение удалено {message.content}')
 
+    else:
+        print('Банвордов не замечено')
 
 bot.run(Token)
