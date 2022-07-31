@@ -430,7 +430,7 @@ async def delit_admin(ctx, *, text):
 
     if str(author) in (data['administrators']['admins']):
 
-        if str(mes) in data['administrators']:
+        if (str(mes) in data['administrators']['admins']) or str(mes) in data['administrators']['editors']:
 
             if (str(mes) in (data['administrators']['admins'])) and (str(mes) != author):
                 del data['administrators']['admins'][mes]
