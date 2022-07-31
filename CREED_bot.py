@@ -423,6 +423,26 @@ async def become_admin(ctx, *, text):  # сделать ручное добав�
         await author.send('Вы уже в системе')
 
 
+@bot.command()
+async def delit_admin(ctx, *, text):
+    author = ctx.message.author
+    mes = ctx.message.content
+
+    if str(author) in (data['administrators']['admins']):
+
+        if str(mes) in data['administrators']:
+
+            if (str(mes) in (data['administrators']['admins'])) and (str(mes) != author):
+                del data['administrators']['admins'][mes]
+
+                await change_data()
+
+                print(f'{mes} удалён из списка администраторов')
+
+        else:
+            await author.send('Я не вижу данного администратора/редактора')
+
+
 @bot.event
 async def on_message(message):
     mes = message.content
@@ -440,5 +460,6 @@ async def on_message(message):
 
     else:
         print('Банвордов не замечено')
+
 
 bot.run(Token)
