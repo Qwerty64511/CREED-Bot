@@ -427,7 +427,7 @@ async def become_admin(ctx, *, text):  # сделать ручное добав�
 async def on_message(message):
     mes = message.content
     author = message.author.nick
-
+    print(author)
     if '!' in mes:
         await bot.process_commands(message)
 
