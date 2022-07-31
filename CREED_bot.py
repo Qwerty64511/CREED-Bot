@@ -440,7 +440,7 @@ async def delit_admin(ctx):
     author = ctx.message.author
     mes = ctx.message.content
     mes = str(mes).replace('!delit_admin ', '', 1)
-    print('ONLYYY YOUUUU')
+
     if str(author) in (data['administrators']['admins']):
 
         if mes in data['administrators']['admins']:
@@ -451,12 +451,12 @@ async def delit_admin(ctx):
                 for i in range(len(data['administrators']['admins'])):
                     if data['administrators']['admins'][i] == mes:
                         del data['administrators']['admins'][i]
+                        print('успешно')
+                        # del data['administrators']['admins'][][]
 
-                # del data['administrators']['admins'][][]
+                        await change_data()
 
-                # await change_data()
-
-                print(f'{mes} удалён из списка администраторов')
+                        print(f'{mes} удалён из списка администраторов')
 
         else:
             await author.send(f'{mes} Я не вижу данного администратора/редактора')
