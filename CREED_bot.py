@@ -439,18 +439,19 @@ async def become_admin(ctx, *, text):  # сделать ручное добав�
 async def delit_admin(ctx):
     author = ctx.message.author
     mes = ctx.message.content
+    mes = str(mes).replace('!delit_admin ', '', 1)
     print('ONLYYY YOUUUU')
     if str(author) in (data['administrators']['admins']):
-        num = int(check_adm(mes))
 
-        if num != 0:
+        if mes in data['administrators']['admins']:
 
             if str(author) not in str(mes):
-                del data['administrators']['admins'][num]
+                print(data['administrators']['admins'])
+                # del data['administrators']['admins'][][]
 
-                await change_data()
+                # await change_data()
 
-            print(f'{mes} удалён из списка администраторов')
+                print(f'{mes} удалён из списка администраторов')
 
         else:
             await author.send(f'{mes} Я не вижу данного администратора/редактора')
