@@ -424,7 +424,7 @@ async def become_admin(ctx, *, text):  # сделать ручное добав�
 
 
 @bot.event
-async def on_message(ctx, message):
+async def on_message(ctx, *, message):
     mes = message.content
     author = ctx.message.author
 
