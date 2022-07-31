@@ -447,6 +447,11 @@ async def delit_admin(ctx):
 
             if str(author) not in str(mes):
                 print(data['administrators']['admins'])
+
+                for i in range(len(data['administrators']['admins'])):
+                    if data['administrators']['admins'][i] == mes:
+                        del data['administrators']['admins'][i]
+
                 # del data['administrators']['admins'][][]
 
                 # await change_data()
