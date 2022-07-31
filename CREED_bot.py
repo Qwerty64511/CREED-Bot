@@ -175,6 +175,18 @@ async def check(text):
     return 0
 
 
+async def check_adm(mes):
+    for i in range(len(data['administrators']['admins'])):
+        if str(data['administrators']['admins'][i] in str(mes)):
+            return i
+
+    for i in range(len(data['administrators']['editors'])):
+        if str(data['administrators']['editors'][i] in str(mes)):
+            return i
+
+    return 0
+
+
 @bot.event
 async def on_raw_reaction_add(payload):
     if payload.message_id == data['post_id']:
@@ -424,25 +436,21 @@ async def become_admin(ctx, *, text):  # сделать ручное добав�
 
 
 @bot.command()
-async def delit_admin(ctx, *, text):
+async def delit_admin(ctx):
     author = ctx.message.author
     mes = ctx.message.content
 
     if str(author) in (data['administrators']['admins']):
+        num = check_adm(mes)
 
-        if (data['administrators']['admins'] in str(mes)) or (data['administrators']['editors'] in str(mes)):
+        if num != 0:
 
-            if (data['administrators']['admins'] in str(mes)) and (author not in mes):
+            if author not in mes:
+                del data['administrators']['admins'][num]
 
-                for i in range(len(data['administrators']['admins'])):
+                await change_data()
 
-                    if data['administrators']['admins'][i] in str(mes):
-
-                        del data['administrators']['admins'][i]
-
-                        await change_data()
-
-                print(f'{mes} удалён из списка администраторов')
+            print(f'{mes} удалён из списка администраторов')
 
         else:
             await author.send(f'{mes} Я не вижу данного администратора/редактора')
