@@ -221,11 +221,12 @@ async def on_raw_reaction_remove(payload):
 
 
 @bot.command()
-async def change_post(ctx):
+async def change_post(ctx, text):
     author = ctx.message.author
 
     if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
-        data['post_id'] = 999350034845933598
+        data['post_id'] = int(text)
+
         await change_data()
         await author.send(data['post_id'])
 
@@ -423,13 +424,15 @@ async def become_admin(ctx, *, text):  # сделать ручное добав�
 
 
 @bot.event
-async def on_message(message):
+async def on_message(message, ctx):
     mes = message.content
+    author = ctx.message.author
 
     if '!' in mes:
         await bot.process_commands(message)
 
-    else:
+    if (author not in data['administrators']['admins']) and ('!' not in mes):
+
         if await check(mes):
             await message.delete()
 
