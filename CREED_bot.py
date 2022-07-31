@@ -386,6 +386,7 @@ async def delit_emoji(ctx, emoji):
 @bot.command()
 async def send_emoji(ctx):
     author = ctx.message.author
+
     if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
         await author.send(data['roles'])
         print(f'{author} получил данные про emoji')
@@ -446,17 +447,18 @@ async def delit_admin(ctx):
         if mes in data['administrators']['admins']:
 
             if str(author) not in str(mes):
-                print(data['administrators']['admins'])
 
                 for i in range(len(data['administrators']['admins'])):
                     if data['administrators']['admins'][i] == mes:
                         del data['administrators']['admins'][i]
-                        print('успешно')
-                        # del data['administrators']['admins'][][]
 
                         await change_data()
 
                         print(f'{mes} удалён из списка администраторов')
+                        break
+
+            else:
+                await author.send('вы не можете удалить самого себя')
 
         else:
             await author.send(f'{mes} Я не вижу данного администратора/редактора')
@@ -477,8 +479,11 @@ async def on_message(message):
 
             print(f'Сообщение удалено {message.content}')
 
+        else:
+            print('Банвордов не замечено')
+
     else:
-        print('Банвордов не замечено')
+        print(f'{author} - целый администратор CREED. Пускай пишет наздоровье')
 
 
 bot.run(Token)
