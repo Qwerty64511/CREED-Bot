@@ -426,12 +426,12 @@ async def become_admin(ctx, *, text):  # сделать ручное добав�
 @bot.event
 async def on_message(message):
     mes = message.content
-    author = message.author
+    author = message.author.nick
 
     if '!' in mes:
         await bot.process_commands(message)
 
-    if (author not in data['administrators']['admins']) and ('!' not in mes):
+    if author not in data['administrators']['admins']:
 
         if await check(mes):
             await message.delete()
