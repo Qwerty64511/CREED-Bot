@@ -439,7 +439,7 @@ async def become_admin(ctx, *, text):  # сделать ручное добав�
 async def delit_admin(ctx):
     author = ctx.message.author
     mes = ctx.message.content
-
+    print('ONLYYY YOUUUU')
     if str(author) in (data['administrators']['admins']):
         num = int(check_adm(mes))
 
