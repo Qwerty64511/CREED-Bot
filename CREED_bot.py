@@ -440,7 +440,7 @@ async def delit_admin(ctx, *, text):
                 print(f'{mes} удалён из списка администраторов')
 
         else:
-            await author.send('Я не вижу данного администратора/редактора')
+            await author.send(f'{mes} Я не вижу данного администратора/редактора')
 
 
 @bot.event
