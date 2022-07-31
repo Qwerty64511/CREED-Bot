@@ -430,7 +430,7 @@ async def delit_admin(ctx, *, text):
 
     if str(author) in (data['administrators']['admins']):
 
-        if (str(mes) in data['administrators']['admins']) or str(mes) in data['administrators']['editors']:
+        if (data['administrators']['admins'] in str(mes)) or (data['administrators']['editors'] in str(mes)):
 
             if (str(mes) in (data['administrators']['admins'])) and (str(mes) != author):
                 del data['administrators']['admins'][mes]
@@ -447,7 +447,7 @@ async def delit_admin(ctx, *, text):
 async def on_message(message):
     mes = message.content
     author = message.author
-    print(author)
+
     if '!' in mes:
         await bot.process_commands(message)
 
