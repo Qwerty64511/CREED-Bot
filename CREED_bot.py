@@ -445,7 +445,7 @@ async def delit_admin(ctx):
 
         if num != 0:
 
-            if author not in mes:
+            if str(author) not in str(mes):
                 del data['administrators']['admins'][num]
 
                 await change_data()
