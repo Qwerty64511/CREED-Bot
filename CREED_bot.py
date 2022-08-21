@@ -405,7 +405,7 @@ async def send_banworlds(ctx):
 async def vivod_bd(ctx):
     author = ctx.message.author
     mes = ctx.message.content
-    mes = str(mes).replace('!vivod_bd', '', 1)
+    mes = str(mes).replace('!vivod_bd ', '', 1)
 
     if str(author) in (data['administrators']['admins'] or data['administrators']['editors']):
 
