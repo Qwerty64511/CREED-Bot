@@ -419,7 +419,8 @@ async def add_admin(ctx, *, text):
     author = ctx.message.author
     mes = ctx.message.content
     mes = str(mes).replace('!add_admin ', '', 1)
-
+    if 'editor'.lower() in mes:
+        mes = mes.replace('editor ', '', 1)
     if str(author) in (data['administrators']['admins']):
 
         if text == 'editor'.lower():
