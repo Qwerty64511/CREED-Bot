@@ -467,7 +467,7 @@ async def delit_admin(ctx):
 
     if str(author) in (data['administrators']['admins']):
 
-        if mes in data['administrators']['admins']:
+        if mes in (data['administrators']['admins'] or data['administrators']['editors']):
 
             if str(author) not in str(mes):
                 if h == 1:
@@ -490,7 +490,7 @@ async def delit_admin(ctx):
 
                             await change_data()
 
-                            print(f'{mes} удалён из списка администраторов')
+                            print(f'{mes} удалён из списка редакторов')
                             break
 
 
