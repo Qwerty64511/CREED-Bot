@@ -508,7 +508,7 @@ async def on_message(message):
     if '!' in mes:
         await bot.process_commands(message)
 
-    if (str(author) not in data['administrators']['admins']) or (str(author) not in data['administrators']['editors']):
+    if (str(author) not in data['administrators']['admins']) and (str(author) not in data['administrators']['editors']):
 
         if await check(mes):
             await message.delete()
