@@ -464,7 +464,7 @@ async def delit_admin(ctx):
     if 'admin'.lower() in mes:
         mes = mes.replace('admin ', '', 1)
         h = 1
-
+    print(mes)
     if str(author) in (data['administrators']['admins']):
 
         if mes in (data['administrators']['admins'] or data['administrators']['editors']):
