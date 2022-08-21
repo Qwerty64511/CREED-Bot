@@ -465,7 +465,7 @@ async def delit_admin(ctx):
     await author.send(f'{mes} - ваш запрос')
     if str(author) in (data['administrators']['admins']):
 
-        if mes in (data['administrators']['admins'] or data['administrators']['editors']):
+        if (mes in data['administrators']['admins']) or (mes in data['administrators']['editors']):
 
             if str(author) not in str(mes):
                 if h == 1:
