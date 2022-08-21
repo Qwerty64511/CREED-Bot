@@ -419,21 +419,30 @@ async def add_admin(ctx, *, text):
     author = ctx.message.author
     mes = ctx.message.content
     mes = str(mes).replace('!add_admin ', '', 1)
+
+    h = -1
+
     if 'editor'.lower() in mes:
         mes = mes.replace('editor ', '', 1)
+        h = 0
+
+    if 'admin'.lower() in mes:
+        mes = mes.replace('admin ', '', 1)
+        h = 1
+
     if str(author) in (data['administrators']['admins']):
 
-        if text == 'editor'.lower():
+        if h == 0:
 
             data['administrators']['editors'] += mes
             await author.send(f'{mes} добавлен в список редакторов')
 
-        if text == 'admin'.lower():
+        if h == 1:
 
             data['administrators']['admins'] += mes
             await author.send(f'{mes} добавлен в список администраторов')
 
-        else:
+        if h == -1:
 
             await author.send(f'Мне не понятно ваше сообщение, попробуйте снова: {mes}')
 
