@@ -433,19 +433,16 @@ async def add_admin(ctx):
     if str(author) in (data['administrators']['admins']):
 
         if h == 0:
-
             data['administrators']['editors'] += [str(mes)]
             await author.send(f'{mes} добавлен в список редакторов')
             await change_data()
 
         if h == 1:
-
             data['administrators']['admins'] += str(mes)
             await author.send(f'{mes} добавлен в список администраторов')
             await change_data()
 
         if h == -1:
-
             await author.send(f'Мне не понятно ваше сообщение, попробуйте снова: {mes}')
 
 
@@ -464,7 +461,8 @@ async def delit_admin(ctx):
     if 'admin'.lower() in mes:
         mes = mes.replace('admin ', '', 1)
         h = 1
-    print(mes)
+
+    await author.send(f'{mes} - ваш запрос')
     if str(author) in (data['administrators']['admins']):
 
         if mes in (data['administrators']['admins'] or data['administrators']['editors']):
