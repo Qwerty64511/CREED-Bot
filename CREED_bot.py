@@ -429,7 +429,6 @@ async def add_admin(ctx):
     if 'admin'.lower() in mes:
         mes = mes.replace('admin ', '', 1)
         h = 1
-    print(mes)
 
     if str(author) in (data['administrators']['admins']):
 
@@ -437,11 +436,13 @@ async def add_admin(ctx):
 
             data['administrators']['editors'] += [str(mes)]
             await author.send(f'{mes} добавлен в список редакторов')
+            await change_data()
 
         if h == 1:
 
             data['administrators']['admins'] += str(mes)
             await author.send(f'{mes} добавлен в список администраторов')
+            await change_data()
 
         if h == -1:
 
@@ -454,21 +455,45 @@ async def delit_admin(ctx):
     mes = ctx.message.content
     mes = str(mes).replace('!delit_admin ', '', 1)
 
+    h = -1
+
+    if 'editor'.lower() in mes:
+        mes = mes.replace('editor ', '', 1)
+        h = 0
+
+    if 'admin'.lower() in mes:
+        mes = mes.replace('admin ', '', 1)
+        h = 1
+
     if str(author) in (data['administrators']['admins']):
 
         if mes in data['administrators']['admins']:
 
             if str(author) not in str(mes):
+                if h == 1:
+                    for i in range(len(data['administrators']['admins'])):
 
-                for i in range(len(data['administrators']['admins'])):
+                        if data['administrators']['admins'][i] == mes:
+                            del data['administrators']['admins'][i]
 
-                    if data['administrators']['admins'][i] == mes:
-                        del data['administrators']['admins'][i]
+                            await change_data()
 
-                        await change_data()
+                            print(f'{mes} удалён из списка администраторов')
+                            break
 
-                        print(f'{mes} удалён из списка администраторов')
-                        break
+                if h == 0:
+
+                    for i in range(len(data['administrators']['editors'])):
+
+                        if data['administrators']['editors'][i] == mes:
+                            del data['administrators']['editors'][i]
+
+                            await change_data()
+
+                            print(f'{mes} удалён из списка администраторов')
+                            break
+
+
 
             else:
                 await author.send('вы не можете удалить самого себя')
@@ -485,7 +510,7 @@ async def on_message(message):
     if '!' in mes:
         await bot.process_commands(message)
 
-    if str(author) not in data['administrators']['admins']:
+    if str(author) not in (data['administrators']['admins'] or data['administrators']['editors']):
 
         if await check(mes):
             await message.delete()
