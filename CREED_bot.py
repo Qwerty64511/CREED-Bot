@@ -430,22 +430,22 @@ async def add_admin(ctx, *, text):
         mes = mes.replace('admin ', '', 1)
         h = 1
     print(mes)
-    #
-    # if str(author) in (data['administrators']['admins']):
-    #
-    #     if h == 0:
-    #
-    #         data['administrators']['editors'] += mes
-    #         await author.send(f'{mes} добавлен в список редакторов')
-    #
-    #     if h == 1:
-    #
-    #         data['administrators']['admins'] += mes
-    #         await author.send(f'{mes} добавлен в список администраторов')
-    #
-    #     if h == -1:
-    #
-    #         await author.send(f'Мне не понятно ваше сообщение, попробуйте снова: {mes}')
+
+    if str(author) in (data['administrators']['admins']):
+
+        if h == 0:
+
+            data['administrators']['editors'] += str(mes)
+            await author.send(f'{mes} добавлен в список редакторов')
+
+        if h == 1:
+
+            data['administrators']['admins'] += str(mes)
+            await author.send(f'{mes} добавлен в список администраторов')
+
+        if h == -1:
+
+            await author.send(f'Мне не понятно ваше сообщение, попробуйте снова: {mes}')
 
 
 @bot.command()
