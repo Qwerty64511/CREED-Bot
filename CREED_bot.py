@@ -395,16 +395,28 @@ async def send_emoji(ctx):
 @bot.command()
 async def send_banworlds(ctx):
     author = ctx.message.author
+
     if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
         await author.send(data['twitchlist'])
         print(f'{author} получил данные про банворды')
 
 
 @bot.command()
-async def become_admin(ctx, *, text):  # сделать ручное добавление админа (Человек не просто пишет, его добавляют,
-    # а человек пишет ник другого человека и его добавляют в список. Сделать 2 вида админов: редактор, технический.
+async def vivod_bd(ctx):
+    author = ctx.message.author
+    mes = ctx.message.content
+    mes = str(mes).replace('!vivod_bd', '', 1)
+
+    if str(author) in (data['administrators']['admins'] or data['administrators']['editors']):
+
+        await author.send(data[mes])
+
+
+@bot.command()
+async def become_admin(ctx, *, text):
     # Сделать красивый вывод базы данных(И нужынх данных из неё) при помощи команды. Пришить интерактивную клавиатуру
     # Сделать хэширование паролей.
+
     author = ctx.message.author
 
     if str(author) not in (data['administrators']['admins']):
@@ -449,6 +461,7 @@ async def delit_admin(ctx):
             if str(author) not in str(mes):
 
                 for i in range(len(data['administrators']['admins'])):
+
                     if data['administrators']['admins'][i] == mes:
                         del data['administrators']['admins'][i]
 
