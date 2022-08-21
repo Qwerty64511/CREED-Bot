@@ -412,7 +412,7 @@ async def vivod_bd(ctx):
 
 
 @bot.command()
-async def add_admin(ctx, *, text):
+async def add_admin(ctx):
     # Сделать красивый вывод базы данных(И нужынх данных из неё) при помощи команды. Пришить интерактивную клавиатуру
     # Сделать хэширование паролей.
 
@@ -435,7 +435,7 @@ async def add_admin(ctx, *, text):
 
         if h == 0:
 
-            data['administrators']['editors'] += str(mes)
+            data['administrators']['editors'] += [str(mes)]
             await author.send(f'{mes} добавлен в список редакторов')
 
         if h == 1:
