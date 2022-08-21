@@ -383,22 +383,22 @@ async def delit_emoji(ctx, emoji):
         print(f'{emoji} удалён из базы данных')
 
 
-@bot.command()
-async def send_emoji(ctx):
-    author = ctx.message.author
+# @bot.command()
+# async def send_emoji(ctx):
+#     author = ctx.message.author
+#
+#     if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
+#         await author.send(data['roles'])
+#         print(f'{author} получил данные про emoji')
 
-    if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
-        await author.send(data['roles'])
-        print(f'{author} получил данные про emoji')
-
-
-@bot.command()
-async def send_banworlds(ctx):
-    author = ctx.message.author
-
-    if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
-        await author.send(data['twitchlist'])
-        print(f'{author} получил данные про банворды')
+#
+# @bot.command()
+# async def send_banworlds(ctx):
+#     author = ctx.message.author
+#
+#     if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
+#         await author.send(data['twitchlist'])
+#         print(f'{author} получил данные про банворды')
 
 
 @bot.command()
@@ -408,44 +408,33 @@ async def vivod_bd(ctx):
     mes = str(mes).replace('!vivod_bd ', '', 1)
 
     if str(author) in (data['administrators']['admins'] or data['administrators']['editors']):
-
         await author.send(data[mes])
 
 
 @bot.command()
-async def become_admin(ctx, *, text):
+async def add_admin(ctx, *, text):
     # Сделать красивый вывод базы данных(И нужынх данных из неё) при помощи команды. Пришить интерактивную клавиатуру
     # Сделать хэширование паролей.
 
     author = ctx.message.author
+    mes = ctx.message.content
+    mes = str(mes).replace('!add_admin ', '', 1)
 
-    if str(author) not in (data['administrators']['admins']):
+    if str(author) in (data['administrators']['admins']):
 
-        if text == '12345':
-            print(f'{author} Добавлен в список технических администраторов')
-            data['administrators']['admins'] += [str(author)]
+        if text == 'editor'.lower():
 
-            await change_data()
-            await author.send('Вы стали администратором бота сервера CREED')
+            data['administrators']['editors'] += mes
+            await author.send(f'{mes} добавлен в список редакторов')
 
-    if str(author) not in data['administrators']['editors']:
-        if text == '123456':
+        if text == 'admin'.lower():
 
-            print(f'{author} Добавлен в список редакторов')
-            data['administrators']['editors'] += [str(author)]
-
-            await change_data()
-
-            await author.send('Вы стали редактором бота сервера CREED')
+            data['administrators']['admins'] += mes
+            await author.send(f'{mes} добавлен в список администраторов')
 
         else:
 
-            await author.send('Пароль введён не верно')
-            print(f'{author} пытался зайти в админ панель')
-
-    else:
-
-        await author.send('Вы уже в системе')
+            await author.send(f'Мне не понятно ваше сообщение, попробуйте снова: {mes}')
 
 
 @bot.command()
