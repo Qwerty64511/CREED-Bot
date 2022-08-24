@@ -235,6 +235,10 @@ async def on_raw_reaction_remove(payload):
 @bot.command()
 async def change_post(ctx, text):
     author = ctx.message.author
+    serv_name = ctx.message.guild.name
+
+    print(str(serv_name))
+
 
     if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
         data['post_id'] = int(text)
