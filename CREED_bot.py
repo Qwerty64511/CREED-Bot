@@ -157,7 +157,10 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 
 @bot.event
-async def on_ready():
+async def on_ready(ctx):
+    
+    serv_name = ctx.message.guild.name
+    print(str(serv_name))
     print('bot connected')
 
 
