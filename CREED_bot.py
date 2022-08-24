@@ -236,10 +236,6 @@ async def on_raw_reaction_remove(payload):
 @bot.command()
 async def change_post(ctx, text):
     author = ctx.message.author
-    serv_name = ctx.message.guild.name
-
-    print(str(serv_name))
-
 
     if (str(author) in data['administrators']['admins']) or (str(author) in data['administrators']['editors']):
         data['post_id'] = int(text)
@@ -267,6 +263,7 @@ async def tech_info(ctx):
 
     serv_name = ctx.message.guild.name
     print(serv_name)
+    
     await author.send('''Функционал: добавление/удаление роли по реакции, 
 Приветствие пользователя при присоединении к серверу, 
 Фильтрация банвордов твитча в сообщениях, 
