@@ -157,10 +157,8 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 
 @bot.event
-async def on_ready(ctx):
+async def on_ready():
 
-    serv_name = ctx.message.guild.name
-    print(str(serv_name))
     print('bot connected')
 
 
@@ -266,6 +264,8 @@ UPD: для полной информации о функционале бота
 @bot.command()
 async def tech_info(ctx):
     author = ctx.message.author
+    
+    serv_name = ctx.message.guild.name
 
     await author.send('''Функционал: добавление/удаление роли по реакции, 
 Приветствие пользователя при присоединении к серверу, 
